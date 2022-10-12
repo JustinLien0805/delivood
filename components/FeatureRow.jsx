@@ -1,8 +1,37 @@
 import { View, Text, ScrollView } from "react-native";
-import React from "react";
+import { useState, useEffect } from "react";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import RestaurantCard from "./RestaurantCard";
-const FeatureRow = ({ id, title, description, featureCategory }) => {
+
+import sanityClient from "../sanity";
+
+const FeatureRow = ({ id, title, description }) => {
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `
+      *[_type == "featured" && _id == $id] {
+        ...,
+        restaurants[]->{
+          ...,
+          dishes[]->,
+          type-> {
+            name
+          }
+        },
+      }[0]
+    `,
+        { id }
+      )
+      .then((data) => {
+        setRestaurants(data?.restaurants);
+      })
+      .catch((err) => {
+        console.log("Err at Featured Row:", err);
+      });
+  }, [id]);
   return (
     <View className="px-4">
       <View className="flex-row justify-between items-center">
@@ -18,31 +47,21 @@ const FeatureRow = ({ id, title, description, featureCategory }) => {
         showsHorizontalScrollIndicator={false}
         className="pt-4"
       >
-        <RestaurantCard
-          id="123"
-          imgUrl="https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/vimdb/161075.jpg"
-          title="sushi"
-          rating={3}
-          genre="japan"
-          address="21313"
-          shortDescription="ddsfs"
-          dishes={[]}
-          long={123}
-          lat={123}
-        />
-        <RestaurantCard
-          id="123"
-          imgUrl="https://assets.tmecosys.com/image/upload/t_web767x639/img/recipe/vimdb/161075.jpg"
-          title="sushi"
-          rating={3}
-          genre="japan"
-          address="21313"
-          shortDescription="ddsfs"
-          dishes={[]}
-          long={123}
-          lat={123}
-        />
-        
+        {restaurants?.map((restaurant, i) => (
+          <RestaurantCard
+            key={`${restaurant._id}-${i}`}
+            id={restaurant._id}
+            imgUrl={restaurant.image}
+            title={restaurant.name}
+            rating={restaurant.rating}
+            genre={restaurant.type?.name}
+            address={restaurant.address}
+            shortDescription={restaurant.short_description}
+            dishes={restaurant.dishes}
+            long={restaurant.long}
+            lat={restaurant.lat}
+          />
+        ))}
       </ScrollView>
     </View>
   );

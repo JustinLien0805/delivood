@@ -6,7 +6,7 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import burger from "../../assets/burger.png";
 import FeatureRow from "../../components/FeatureRow";
@@ -17,12 +17,27 @@ import {
   AdjustmentsVerticalIcon,
 } from "react-native-heroicons/outline";
 import Categories from "../../components/Categories";
+import client from "../../sanity";
 const HomeSreen = () => {
+  const [featuredCategories, setFeaturedCategories] = useState([]);
+
   const navigation = useNavigation();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: false,
     });
+  }, []);
+
+  useEffect(() => {
+    client
+      .fetch(`*[_type == "featured"] {..., restaurants[]->{..., dishes[]->}}`)
+      .then((data) => {
+        setFeaturedCategories(data);
+      })
+      .catch((err) => {
+        console.log("Err at Home Page:", err);
+      });
   }, []);
   return (
     <SafeAreaView className="bg-white">
@@ -46,18 +61,15 @@ const HomeSreen = () => {
       </View>
       <ScrollView className="h-full">
         <Categories />
-        <FeatureRow
-          id="1"
-          title="recommend"
-          description="adsfgdss"
-          featureCategory="dfads"
-        />
-        <FeatureRow
-          id="1"
-          title="recommend"
-          description="adsfgdss"
-          featureCategory="dfads"
-        />
+     
+        {featuredCategories?.map((category) => (
+          <FeatureRow
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
