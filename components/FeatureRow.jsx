@@ -33,7 +33,7 @@ const FeatureRow = ({ id, title, description }) => {
       });
   }, [id]);
   return (
-    <View className="px-4">
+    <View className="px-4 mb-3">
       <View className="flex-row justify-between items-center">
         <Text className="text-xl font-bold uppercase text-purple-500">
           {title}
@@ -45,7 +45,7 @@ const FeatureRow = ({ id, title, description }) => {
         horizontal
         contentContainerStyle={{ paddingHorizontal: 15 }}
         showsHorizontalScrollIndicator={false}
-        className="pt-4"
+        className="pt-2"
       >
         {restaurants?.map((restaurant, i) => (
           <RestaurantCard

@@ -44,7 +44,7 @@ const HomeSreen = () => {
       <View className="flex-row items-center mb-3 px-4 space-x-2">
         <Image source={burger} className="h-7 w-7" />
         <View className="flex-1">
-          <Text className="text-xs font-bold text-purple-400">Deliver Now</Text>
+          <Text className="text-xs font-bold text-purple-600">Deliver Now</Text>
           <Text className="text-xl font-bold flex justify-center">
             Current Location
             <ChevronDownIcon color="#9061F9" size={20} />
@@ -55,13 +55,13 @@ const HomeSreen = () => {
       <View className="flex-row mb-3 px-4 space-x-3 items-center">
         <View className="flex-row bg-gray-300 grow h-8 items-center space-x-3 p-1 rounded-lg">
           <MagnifyingGlassIcon color="#9061F9" />
-          <TextInput placeholder="Restaurant" />
+          <TextInput placeholder="Restaurant" className="grow"/>
         </View>
         <AdjustmentsVerticalIcon color="#9061F9" size={32} />
       </View>
-      <ScrollView className="h-full">
+      <ScrollView className="mb-20">
         <Categories />
-     
+
         {featuredCategories?.map((category) => (
           <FeatureRow
             key={category._id}
