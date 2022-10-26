@@ -44,7 +44,7 @@ const HomeSreen = () => {
       <View className="flex-row items-center mb-3 px-4 space-x-2">
         <Image source={burger} className="h-7 w-7" />
         <View className="flex-1">
-          <Text className="text-xs font-bold text-purple-600">Deliver Now</Text>
+          <Text className="text-xs font-bold text-purple-500">Deliver Now</Text>
           <Text className="text-xl font-bold flex justify-center">
             Current Location
             <ChevronDownIcon color="#9061F9" size={20} />

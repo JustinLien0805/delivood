@@ -19,7 +19,7 @@ const Categories = () => {
         console.log("Err from category:", err);
       });
   }, []);
-  console.log(categories);
+
   return (
     <ScrollView
       contentContainerStyle={{ paddingHorizontal: 15, paddingTop: 10 }}
