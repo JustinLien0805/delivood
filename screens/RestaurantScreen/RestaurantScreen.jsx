@@ -1,4 +1,11 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  StatusBar,
+} from "react-native";
 import React, { useEffect, useLayoutEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { urlFor } from "../../sanity";
@@ -34,6 +41,7 @@ const RestaurantScreen = () => {
   return (
     <>
       <BasketIcon />
+      <StatusBar barStyle="light" />
       <ScrollView>
         <View className="relative">
           <Image

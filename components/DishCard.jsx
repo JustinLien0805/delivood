@@ -31,8 +31,8 @@ const DishCard = ({ id, name, description, price, image }) => {
         className="flex-row justify-between w-full border-t-[0.5px] border-gray-300 pl-4"
         onPress={() => setIsPressed(!isPressed)}
       >
-        <View className="grow py-2 space-y-1">
-          <Text className="text-2xl font-bold text-purple-600">{name}</Text>
+        <View className="py-2 space-y-1">
+          <Text className="text-lg font-bold text-purple-600">{name}</Text>
           <Text className="text-gray-500">{description}</Text>
           <Text className="text-xl">${price}</Text>
         </View>
@@ -40,7 +40,7 @@ const DishCard = ({ id, name, description, price, image }) => {
           source={{
             uri: urlFor(image).url(),
           }}
-          className="bg-red-500 w-40"
+          className="bg-red-500 w-28 object-contain"
         />
       </TouchableOpacity>
       {isPressed && (

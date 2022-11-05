@@ -45,7 +45,7 @@ const BasketScreen = () => {
       <View className="flex-1 bg-gray-100">
         <View className="p-5 border-b border-purple-500 bg-white shadow-sm">
           <View>
-            <Text className="text-lg font-bold text-center">Basket</Text>
+            <Text className="text-2xl font-bold text-center">Basket</Text>
             <Text className="text-center text-gray-400">
               {restaurant.title}
             </Text>
@@ -107,12 +107,12 @@ const BasketScreen = () => {
 
           <View className="flex-row justify-between">
             <Text className="text-gray-400">Delivery Fee</Text>
-            <Text className="text-gray-400">5.99</Text>
+            <Text className="text-gray-400">$5.99</Text>
           </View>
 
           <View className="flex-row justify-between">
             <Text>Order Total</Text>
-            <Text className="font-extrabold">$ {basketTotal + 5.99}</Text>
+            <Text className="font-extrabold">${basketTotal + 5.99}</Text>
           </View>
 
           <TouchableOpacity

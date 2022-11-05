@@ -5,6 +5,8 @@ import {
   Image,
   TextInput,
   ScrollView,
+  StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import { useLayoutEffect, useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
@@ -41,21 +43,25 @@ const HomeSreen = () => {
   }, []);
   return (
     <SafeAreaView className="bg-white">
+      <StatusBar barStyle="dark-content" />
       <View className="flex-row items-center mb-3 px-4 space-x-2">
         <Image source={burger} className="h-7 w-7" />
-        <View className="flex-1">
+        <TouchableOpacity className="flex-1" 
+        onPress={()=>{
+          navigation.navigate("Delivery")
+        }}>
           <Text className="text-xs font-bold text-purple-500">Deliver Now</Text>
           <Text className="text-xl font-bold flex justify-center">
             Current Location
             <ChevronDownIcon color="#9061F9" size={20} />
           </Text>
-        </View>
+        </TouchableOpacity>
         <UserIcon color="#9061F9" size={32} />
       </View>
       <View className="flex-row mb-3 px-4 space-x-3 items-center">
         <View className="flex-row bg-gray-300 grow h-8 items-center space-x-3 p-1 rounded-lg">
           <MagnifyingGlassIcon color="#9061F9" />
-          <TextInput placeholder="Restaurant" className="grow"/>
+          <TextInput placeholder="Restaurant" className="grow" />
         </View>
         <AdjustmentsVerticalIcon color="#9061F9" size={32} />
       </View>
